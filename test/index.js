@@ -4,10 +4,10 @@
 'use strict';
 
 var assert = require('assert');
+var keys = require('keys');
 var sinon = require('sinon');
 var foldl = require('../');
 
-// TODO: Clean up tests
 describe('foldl', function() {
   var add;
 
@@ -48,29 +48,6 @@ describe('foldl', function() {
     assert.equal(foldl(add, 'z', ['a', 'b', 'c']), 'zabc');
   });
 
-  it('should ignore non-indexed array values', function() {
-    var arr = ['a'];
-    arr.enchanter = 'Tim';
-    foldl(add, 'z', arr);
-
-    assert(add.calledOnce);
-    assert(add.calledWith('z', 'a', 0, arr));
-  });
-
-  // TODO: Test object iteration order
-
-  it('should work on objects', function() {
-    var obj = {
-      enchanter: 'Tim',
-      meal: 'spam'
-    };
-    var result = foldl(function(acc, val) {
-      return acc.concat(val);
-    }, [], obj).sort();
-
-    assert.deepEqual(result, ['Tim', 'spam']);
-  });
-
   it('should ignore non-enumerable properties', function() {
     var obj = Object.create(null, {
       enchanter: {
@@ -104,6 +81,34 @@ describe('foldl', function() {
     }, [], child);
 
     assert.deepEqual(result, ['spam']);
+  });
+
+  it('should ignore non-indexed array values', function() {
+    var arr = ['a', 'b', 'c'];
+    arr.enchanter = 'Tim';
+    foldl(add, 'z', arr);
+
+    assert(add.calledThrice);
+    assert(add.calledWith('z', 'a', 0, arr));
+  });
+
+  it('should work on objects (with no guarantee of iteration order)', function() {
+    var obj = {
+      meal: 'spam',
+      '0': 'hello',
+      enchanter: 'Tim'
+    };
+    var ks = keys(obj);
+    var acc = true;
+    var spy = sinon.spy(function(acc) {
+      return acc;
+    });
+    foldl(spy, acc, obj);
+
+    assert(spy.calledThrice);
+    assert(spy.firstCall.calledWith(acc, obj[ks[0]], ks[0], obj));
+    assert(spy.secondCall.calledWith(acc, obj[ks[1]], ks[1], obj));
+    assert(spy.thirdCall.calledWith(acc, obj[ks[2]], ks[2], obj));
   });
 
   it('should work on string primitives', function() {

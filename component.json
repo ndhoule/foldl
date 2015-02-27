@@ -11,6 +11,7 @@
     "ndhoule/each": "^1.0.0"
   },
   "development": {
+    "ndhoule/keys": "^1.0.0",
     "mochajs/mocha": "^2.1.0"
   }
 }

@@ -20,6 +20,7 @@
     "each": "git://github.com/ndhoule/each.git#1.0.0"
   },
   "devDependencies": {
+    "keys": "git://github.com/ndhoule/keys.git#1.0.0",
     "esformatter-braces": "^1.0.0",
     "esformatter-quotes": "^1.0.0",
     "esformatter-semicolons": "^1.0.3",
