@@ -1,4 +1,4 @@
-# foldl [![Circle CI][circleci-badge]][circleci-link]
+# foldl [![CI][ci-badge]][ci-link]
 
 Apply a function to each value in a collection, accumulating the results into a single return value.
 
@@ -43,5 +43,5 @@ foldl(function(results, phoneNumber) {
 
 Released under the [MIT license](LICENSE.md).
 
-[circleci-link]: https://circleci.com/gh/ndhoule/foldl
-[circleci-badge]: https://circleci.com/gh/ndhoule/foldl.svg?style=svg&circle-token=861d6f06f13892bcdcaf89ac1f00a368c5d63700
+[ci-link]: https://travis-ci.org/ndhoule/foldl
+[ci-badge]: https://travis-ci.org/ndhoule/foldl.svg?branch=master
