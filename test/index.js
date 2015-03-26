@@ -1,12 +1,26 @@
-/* global describe, it, beforeEach */
+/* global describe, it, xit, beforeEach */
 /* eslint no-new-wrappers: 0 */
 
 'use strict';
+
+/**
+ * Module dependencies.
+ */
 
 var assert = require('assert');
 var keys = require('keys');
 var sinon = require('sinon');
 var foldl = require('../');
+
+/**
+ * Locals.
+ */
+
+var es5It = typeof Object.create === 'function' ? it : xit;
+
+/**
+ * Tests.
+ */
 
 describe('foldl', function() {
   var add;
@@ -70,19 +84,6 @@ describe('foldl', function() {
     assert.deepEqual(result, ['Tim', 'spam']);
   });
 
-  it('should ignore inherited properties', function() {
-    var parent = {
-      enchanter: 'Tim'
-    };
-    var child = Object.create(parent);
-    child.food = 'spam';
-    var result = foldl(function(acc, val) {
-      return acc.concat(val);
-    }, [], child);
-
-    assert.deepEqual(result, ['spam']);
-  });
-
   it('should ignore non-indexed array values', function() {
     var arr = ['a', 'b', 'c'];
     arr.enchanter = 'Tim';
@@ -111,12 +112,8 @@ describe('foldl', function() {
     assert(spy.thirdCall.calledWith(acc, obj[ks[2]], ks[2], obj));
   });
 
-  it('should work on string primitives', function() {
+  it('should work on strings', function() {
     assert.equal(foldl(add, 'z', 'abc'), 'zabc');
-  });
-
-  it('should work on string objects', function() {
-    assert.equal(foldl(add, new String('z'), new String('abc')), 'zabc');
   });
 
   it('should throw an error when passed a non-function as its `fn` argument', function() {
@@ -126,5 +123,30 @@ describe('foldl', function() {
     assert.throws(function() {
       foldl('fdsa', 1, [1]);
     });
+  });
+
+  es5It('should ignore inherited properties', function() {
+    var parent = {
+      enchanter: 'Tim'
+    };
+    var child = Object.create(parent);
+    child.food = 'spam';
+    var result = foldl(function(acc, val) {
+      return acc.concat(val);
+    }, [], child);
+
+    assert.deepEqual(result, ['spam']);
+  });
+
+  es5It('should ignore non-enumerable properties', function() {
+    var obj = Object.create({}, {
+      food: { value: 'spam', enumerable: true },
+      ignore: { value: true, enumerable: false }
+    });
+    var result = foldl(function(acc, val) {
+      return acc.concat(val);
+    }, [], obj);
+
+    assert.deepEqual(result, ['spam']);
   });
 });
