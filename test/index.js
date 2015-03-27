@@ -62,28 +62,6 @@ describe('foldl', function() {
     assert.equal(foldl(add, 'z', ['a', 'b', 'c']), 'zabc');
   });
 
-  it('should ignore non-enumerable properties', function() {
-    var obj = Object.create(null, {
-      enchanter: {
-        value: 'Tim',
-        enumerable: true
-      },
-      fear: {
-        value: 'rabbit',
-        enumerable: false
-      },
-      meal: {
-        value: 'spam',
-        enumerable: true
-      }
-    });
-    var result = foldl(function(acc, val) {
-      return acc.concat(val);
-    }, [], obj).sort();
-
-    assert.deepEqual(result, ['Tim', 'spam']);
-  });
-
   it('should ignore non-indexed array values', function() {
     var arr = ['a', 'b', 'c'];
     arr.enchanter = 'Tim';
@@ -112,10 +90,6 @@ describe('foldl', function() {
     assert(spy.thirdCall.calledWith(acc, obj[ks[2]], ks[2], obj));
   });
 
-  it('should work on strings', function() {
-    assert.equal(foldl(add, 'z', 'abc'), 'zabc');
-  });
-
   it('should throw an error when passed a non-function as its `fn` argument', function() {
     assert.throws(function() {
       foldl('fdsa', 1, []);
@@ -123,6 +97,14 @@ describe('foldl', function() {
     assert.throws(function() {
       foldl('fdsa', 1, [1]);
     });
+  });
+
+  es5It('should work on strings', function() {
+    assert.equal(foldl(add, 'z', 'abc'), 'zabc');
+  });
+
+  es5It('should work on string objects', function() {
+    assert.equal(foldl(add, 'z', new String('abc')), 'zabc');
   });
 
   es5It('should ignore inherited properties', function() {
@@ -139,14 +121,25 @@ describe('foldl', function() {
   });
 
   es5It('should ignore non-enumerable properties', function() {
-    var obj = Object.create({}, {
-      food: { value: 'spam', enumerable: true },
-      ignore: { value: true, enumerable: false }
+    var obj = Object.create(null, {
+      enchanter: {
+        value: 'Tim',
+        enumerable: true
+      },
+      fear: {
+        value: 'rabbit',
+        enumerable: false
+      },
+      meal: {
+        value: 'spam',
+        enumerable: true
+      }
     });
     var result = foldl(function(acc, val) {
       return acc.concat(val);
-    }, [], obj);
+    }, [], obj).sort();
 
-    assert.deepEqual(result, ['spam']);
+    assert.deepEqual(result, ['Tim', 'spam']);
   });
+
 });

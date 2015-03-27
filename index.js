@@ -44,6 +44,7 @@ var foldl = function foldl(iterator, accumulator, collection) {
   each(function(val, i, collection) {
     accumulator = iterator(accumulator, val, i, collection);
   }, collection);
+
   return accumulator;
 };
 
