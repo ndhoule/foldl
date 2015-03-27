@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ndhoule/foldl",
   "dependencies": {
-    "each": "git://github.com/ndhoule/each.git#1.0.0"
+    "each": "git://github.com/ndhoule/each.git#1.0.1"
   },
   "devDependencies": {
     "esformatter-braces": "^0.1.7",
@@ -25,7 +25,7 @@
     "esformatter-semicolons": "^1.0.3",
     "eslint": "^0.15.1",
     "jsfmt": "^0.4.0",
-    "keys": "git://github.com/ndhoule/keys.git#1.0.0",
+    "keys": "git://github.com/ndhoule/keys.git#1.1.0",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "zuul": "^2.0.0"

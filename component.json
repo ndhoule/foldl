@@ -8,10 +8,10 @@
   "license": "MIT",
   "scripts": ["index.js"],
   "dependencies": {
-    "ndhoule/each": "^1.0.0"
+    "ndhoule/each": "^1.0.1"
   },
   "development": {
-    "ndhoule/keys": "^1.0.0",
+    "ndhoule/keys": "^1.1.0",
     "mochajs/mocha": "^2.1.0"
   }
 }
