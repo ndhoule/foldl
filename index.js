@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var each = require('each');
+var each = require('@ndhoule/each');
 
 /**
  * Reduces all the values in a collection down into a single value. Does so by iterating through the
