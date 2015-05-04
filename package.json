@@ -1,5 +1,5 @@
 {
-  "name": "foldl",
+  "name": "@ndhoule/foldl",
   "version": "1.0.1",
   "description": "Apply a function to each value in a collection, accumulating the results into a single return value.",
   "main": "index.js",
