@@ -4,16 +4,9 @@ Apply a function to each value in a collection, accumulating the results into a 
 
 ## Installation
 
-Browser:
-
 ```sh
-component install ndhoule/foldl
-```
-
-Node:
-
-```sh
-$ npm install foldl
+$ component install ndhoule/foldl
+$ npm install @ndhoule/foldl
 ```
 
 ## API
