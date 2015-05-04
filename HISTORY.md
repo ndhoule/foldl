@@ -1,3 +1,11 @@
+## 1.0.2
+
+- Ensure npm@>=2.7.0 on Travis CI
+- Use scoped package
+- Update Makefile
+- Move git dependencies to npm packages
+- Update installation instructions
+
 ## 1.0.1
 
 - Tests passing on IE6-8
