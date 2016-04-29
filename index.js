@@ -1,11 +1,10 @@
 'use strict';
 
-/**
+/*
  * Module dependencies.
  */
 
-// XXX: Hacky fix for Duo not supporting scoped modules
-var each; try { each = require('@ndhoule/each'); } catch(e) { each = require('each'); }
+var each = require('@ndhoule/each');
 
 /**
  * Reduces all the values in a collection down into a single value. Does so by iterating through the
@@ -36,7 +35,6 @@ var each; try { each = require('@ndhoule/each'); } catch(e) { each = require('ea
  * }, [], phonebook);
  * // => ['655-222-6789', '655-333-1298']
  */
-
 var foldl = function foldl(iterator, accumulator, collection) {
   if (typeof iterator !== 'function') {
     throw new TypeError('Expected a function but received a ' + typeof iterator);
@@ -49,7 +47,7 @@ var foldl = function foldl(iterator, accumulator, collection) {
   return accumulator;
 };
 
-/**
+/*
  * Exports.
  */
 

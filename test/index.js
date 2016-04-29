@@ -8,8 +8,7 @@
  */
 
 var assert = require('assert');
-// XXX: Hacky fix for Duo not supporting scoped modules
-var keys; try { keys = require('@ndhoule/keys'); } catch(e) { keys = require('keys'); }
+var keys = require('@ndhoule/keys');
 var sinon = require('sinon');
 var foldl = require('../');
 
